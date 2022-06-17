@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * infinite_add - Function prototype
@@ -12,51 +11,37 @@
  */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int a, i, x = 0, y = 0, t = 0;
+	int i, j, k, l, m, n;
 
-	for (i = 0; *(n1 + i); i++)
-		x++;
-
-	for (i = 0; *(n2 + i); i++)
-		y++;
-
-	if (size_r <= x + 1 || size_r <= y + 1)
+	for (i = 0; n1[i]; i++)
+		;
+	for (j = 0; n2[j]; j++)
+		;
+	if (i > size_r || j > size_r)
 		return (0);
-
-	n1 += x - 1, n2 += y - 1;
-
-	*(r + size_r) = '\0';
-
-	for (; *n1 && *n2; n1--, n2--, size_r--)
+	m = 0;
+	for (i -= 1, j -= 1, k = 0; k < size_r - 1; i--, j--, k++)
 	{
-		a = (*n1 - '0') + (*n2 - '0');
-		a += t;
-		*(r + size_r) = (a % 10) + '0';
-		t = a / 10;
+		n = m;
+		if (i >= 0)
+			n += n1[i] - '0';
+		if (j >= 0)
+			n += n2[j] - '0';
+		if (i < 0 && j < 0 && n == 0)
+		{
+			break;
+		}
+		m = n / 10;
+		r[k] = n % 10 + '0';
 	}
-
-	for (; *n1; n1--, size_r--)
-	{
-		a = (*n1 - '0') + t;
-		*(r + size_r) = (a % 10) + '0';
-		t = a / 10;
-	}
-
-	for (; *n2; n2--, size_r--)
-	{
-		a = (*n2 - '0') + t;
-		*(r + size_r) = (a % 10) + '0';
-		t = a / 10;
-	}
-
-	if (t && size_r >= 0)
-	{
-		*(r + size_r) = (t % 10) + '0';
-		return (r + size_r);
-	}
-
-	if (t && size_r < 0)
+	r[k] = '\0';
+	if (i >= 0 || j >= 0 || m)
 		return (0);
-
-	return (r + size_r + 1);
+	for (k -= 1, l = 0; l < k; k--, l++)
+	{
+		m = r[k];
+		r[k] = r[l];
+		r[l] = m;
+	}
+	return (r);
 }
