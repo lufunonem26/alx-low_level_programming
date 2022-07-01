@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 int find_len(char *str);
 char *create_xarray(int size);
@@ -7,11 +9,12 @@ void get_prod(char *prod, char *mult, int digit, int zeroes);
 void add_nums(char *final_prod, char *next_prod, int next_len);
 
 /**
- * find_len - Finds the length of a string.
+ * find_len - Entry Point
+ * finds the length of a string.
  * @str: The string to be measured.
- *
  * Return: The length of the string.
  */
+
 int find_len(char *str)
 {
 	int len = 0;
@@ -23,39 +26,37 @@ int find_len(char *str)
 }
 
 /**
- * create_xarray - Creates an array of chars and initializes it with
- *                 the character 'x'. Adds a terminating null byte.
+ * create_xarray - Entry Point
+ * creates an array of chars and initializes it with
  * @size: The size of the array to be initialized.
- *
- * Description: If there is insufficient space, the
- *              function exits with a status of 98.
  * Return: A pointer to the array.
  */
+
 char *create_xarray(int size)
 {
 	char *array;
-	int index;
+	int Cntr;
 
 	array = malloc(sizeof(char) * size);
 
 	if (array == NULL)
 		exit(98);
 
-	for (index = 0; index < (size - 1); index++)
-		array[index] = 'x';
+	for (Cntr = 0; Cntr < (size - 1); Cntr++)
+		array[Cntr] = 'x';
 
-	array[index] = '\0';
+	array[Cntr] = '\0';
 
 	return (array);
 }
 
 /**
- * iterate_zeroes - Iterates through a string of numbers containing
- *                  leading zeroes until it hits a non-zero number.
+ * iterate_zeroes - Entry Point
+ * iterates through a string of numbers containing
  * @str: The string of numbers to be iterate through.
- *
- * Return: A pointer to the next non-zero element.
+ * Return: pointer
  */
+
 char *iterate_zeroes(char *str)
 {
 	while (*str && *str == '0')
@@ -65,13 +66,12 @@ char *iterate_zeroes(char *str)
 }
 
 /**
- * get_digit - Converts a digit character to a corresponding int.
+ * get_digit - Entry Point
+ * converts a digit character to a corresponding int.
  * @c: The character to be converted.
- *
- * Description: If c is a non-digit, the function
- *              exits with a status of 98.
  * Return: The converted int.
  */
+
 int get_digit(char c)
 {
 	int digit = c - '0';
@@ -86,15 +86,15 @@ int get_digit(char c)
 }
 
 /**
- * get_prod - Multiplies a string of numbers by a single digit.
- * @prod: The buffer to store the result.
+ * get_prod - Entry Point
+ * multiplies a string of numbers by a single digit
+ * @prod: The buffer to store the result
  * @mult: The string of numbers.
- * @digit: The single digit.
+ * @digit: The single digit
  * @zeroes: The necessary number of leading zeroes.
- *
- * Description: If mult contains a non-digit, the function
- *              exits with a status value of 98.
+ * Return: 98
  */
+
 void get_prod(char *prod, char *mult, int digit, int zeroes)
 {
 	int mult_len, num, tens = 0;
@@ -135,11 +135,14 @@ void get_prod(char *prod, char *mult, int digit, int zeroes)
 }
 
 /**
- * add_nums - Adds the numbers stored in two strings.
- * @final_prod: The buffer storing the running final product.
- * @next_prod: The next product to be added.
- * @next_len: The length of next_prod.
+ * add_nums - Entry Point
+ * adds the numbers stored in two strings
+ * @final_prod: The buffer storing the running final product
+ * @next_prod: The next product to be added
+ * @next_len: The length of next_prod
+ * Return: void
  */
+
 void add_nums(char *final_prod, char *next_prod, int next_len)
 {
 	int num, tens = 0;
@@ -177,14 +180,13 @@ void add_nums(char *final_prod, char *next_prod, int next_len)
 }
 
 /**
- * main - Multiplies two positive numbers.
- * @argv: The number of arguments passed to the program.
- * @argc: An array of pointers to the arguments.
- *
- * Description: If the number of arguments is incorrect or one number
- *              contains non-digits, the function exits with a status of 98.
- * Return: Always 0.
+ * main - Entry Point
+ * multiplies two positive numbers
+ * @argc: argument counter
+ * @argv: argument vector
+ * Return: 0
  */
+
 int main(int argc, char *argv[])
 {
 	char *final_prod, *next_prod;
